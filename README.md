@@ -43,7 +43,7 @@ class Chat_Bot_Client(OpenAPI_Client, Chat_Context_Manager_Mixin):
             # If valid, save it in context to be passed on future requests
             response = result["choices"][0]["message"]["content"]
             if response:
-                client.add_statement(ROLE.ASSISTANT, response)
+                self.add_statement(ROLE.ASSISTANT, response)
                 return response
             
         except Exception:
@@ -54,12 +54,12 @@ class Chat_Bot_Client(OpenAPI_Client, Chat_Context_Manager_Mixin):
         """ Get user input to send to the chatbot, save for future requests """
 
         # Get a question from the user and store is
-        user_input = input('What would you like to ask?\n')
+        user_input = input('What would you like to ask?\n>>> ')
         
-        client.add_statement(ROLE.USER, user_input)
+        self.add_statement(ROLE.USER, user_input)
 
 
-# Simple command line chatbot app :)
+# Simple chatbot app :)
 if __name__ == "__main__":
     # API Key is read from OPENAI_API_KEY
     client = Chat_Bot_Client()
@@ -74,6 +74,5 @@ if __name__ == "__main__":
         # Send it to the chatbot and get the response
         response = client.run_prompt()
         # Print the response
-        print(response)
-
+        print("\n" + response + "\n")
 ```
