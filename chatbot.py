@@ -1,28 +1,3 @@
-# OpenAI Python
-
-A (very rough WIP) Python Client for OpenAI APIs.
-
-## Overview
-
-Right now this just provides a base client that allows a reusable way to do common things
-(like loading the API key) plus some easy overrides (like which model to use) and some mixins 
-for when state dependence is important
-
-## Example
-
-All I've got in lieu of real docs for now :). Run a local chatbot from your command line:
-
-1. Export your OpenAI token
-
-```sh
-export OPENAI_API_KEY=AKIAIOSFODNN7EXAMPLE
-```
-
-1. Clone the repo (I'll throw up a PyPi package before too long)
-
-1. Use the base class and mixins to create apps!
-
-```python
 import openai
 from .client import OpenAPI_Client
 from .mixins import Chat_Context_Manager_Mixin
@@ -59,7 +34,7 @@ class Chat_Bot_Client(OpenAPI_Client, Chat_Context_Manager_Mixin):
         client.add_statement(ROLE.USER, user_input)
 
 
-# Simple command line chatbot app :)
+# Simple chatbot app :)
 if __name__ == "__main__":
     # API Key is read from OPENAI_API_KEY
     client = Chat_Bot_Client()
@@ -75,5 +50,3 @@ if __name__ == "__main__":
         response = client.run_prompt()
         # Print the response
         print(response)
-
-```
