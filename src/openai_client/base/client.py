@@ -74,8 +74,7 @@ class OpenAPI_Client():
 
         # Handle connection error here
         elif error_type == openai.error.APIConnectionError:
-            pass
-            #return IOError(f"Failed to connect to OpenAI API: {e}")
+            return IOError(f"Failed to connect to OpenAI API: {e}")
 
         # Handle rate limit error (we recommend using exponential backoff)
         elif error_type == openai.error.RateLimitError:
