@@ -57,8 +57,8 @@ class OpenAPI_Client():
                 if new_error:
                     raise new_error
 
-            finally:
-                time.sleep(self._ms_between_retries * .001)
+                # Backoff
+                time.sleep((num_retries + 1) ** 2 * (self._ms_between_retries * .001))
                 num_retries += 1
 
 
@@ -74,7 +74,8 @@ class OpenAPI_Client():
 
         # Handle connection error here
         elif error_type == openai.error.APIConnectionError:
-            return IOError(f"Failed to connect to OpenAI API: {e}")
+            pass
+            #return IOError(f"Failed to connect to OpenAI API: {e}")
 
         # Handle rate limit error (we recommend using exponential backoff)
         elif error_type == openai.error.RateLimitError:
