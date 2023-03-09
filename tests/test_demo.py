@@ -1,6 +1,6 @@
 # clients
 import unittest
-from src import Chat_Bot_Client
+from src.openai_client import Chat_Bot_Client
 
 
 class TestDemo(unittest.TestCase):
