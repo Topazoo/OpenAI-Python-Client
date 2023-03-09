@@ -13,7 +13,6 @@ if __name__ == "__main__":
     client.add_directive("As outlined in the handbook, if a roll is necessary based on the situation, roll for the user")
     client.add_directive("Finish by asking the player what they'd like to do next")
 
-
     # Simple loop
     while True:
         # Send it to the chatbot and get the response
