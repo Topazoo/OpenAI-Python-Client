@@ -1,4 +1,4 @@
-# OpenAI Python
+# OpenAI API Python Client
 
 A (very rough WIP) Python Client for OpenAI APIs.
 
@@ -82,3 +82,16 @@ if __name__ == "__main__":
         # Get question from the user
         client.get_user_input()
 ```
+
+## Contributing
+
+Contributions are welcome! Please not the following when contributing:
+
+- Unittests must be added under the `tests/` directory for the PR to be approved. You can run unittests from the root project directory with the following command:
+
+    ```sh
+    python setup.py test
+    ```
+
+- PRs cannot be merged without all unittests passing (they will execute automatically)
+- Merges to `main` will automatically create a new release on PyPi **[unless it is from a forked Repo](https://stackoverflow.com/questions/58737785/github-actions-empty-env-secrets)**
