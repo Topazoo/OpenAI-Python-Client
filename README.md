@@ -1,11 +1,11 @@
 # OpenAI API Python Client
 
-A (very rough WIP) base Python Client for OpenAI APIs and some concrete "stateful" clients for common operations like running a chatbot with context
+A (very rough WIP) base Python 3.9+ client for OpenAI APIs and some concrete "stateful" clients for common operations like running a chatbot with context
 
 ## Overview
 
 Right now this just provides a base client that allows a reusable way to do common things
-(like loading the API key) plus some easy overrides (like which model to use) and some mixins for when state dependence is important.
+(like loading the API key or backing-off/retrying on an APIError) plus some easy overrides (like which model to use) and some mixins for when state dependence is important.
 
 Now this also includes some pre-built "recipe" clients:
 
@@ -13,7 +13,7 @@ Now this also includes some pre-built "recipe" clients:
 
 ## Example
 
-All I've got in lieu of real docs for now :). Run a local chatbot from your command line:
+All I've got in lieu of real docs for now :). Run a local chatbot to play Dungeons and Dragons from your command line:
 
 1. Install this library as a PyPi package
 
