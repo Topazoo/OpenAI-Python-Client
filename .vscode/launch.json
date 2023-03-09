@@ -9,7 +9,7 @@
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/..",
-            "module": "${workspaceFolderBasename}.src.clients.chatbot.d_and_d_demo",
+            "module": "${workspaceFolderBasename}.src.openai_client.clients.chatbot.d_and_d_demo",
             "justMyCode": true
         }
     ]
