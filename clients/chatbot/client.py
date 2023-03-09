@@ -1,7 +1,7 @@
 import openai
-from .client import OpenAPI_Client
-from .mixins import Chat_Context_Manager_Mixin
-from .enums import ROLE
+from ...base import OpenAPI_Client
+from ...mixins import Chat_Context_Manager_Mixin
+from ...enums import ROLE
 
 # Example concrete client using the base client and a mixin
 class Chat_Bot_Client(OpenAPI_Client, Chat_Context_Manager_Mixin):
@@ -29,24 +29,6 @@ class Chat_Bot_Client(OpenAPI_Client, Chat_Context_Manager_Mixin):
         """ Get user input to send to the chatbot, save for future requests """
 
         # Get a question from the user and store is
-        user_input = input('What would you like to ask?\n>>> ')
+        user_input = input('>>> ')
         
         self.add_statement(ROLE.USER, user_input)
-
-
-# Simple chatbot app :)
-if __name__ == "__main__":
-    # API Key is read from OPENAI_API_KEY
-    client = Chat_Bot_Client()
-
-    # Add a high level directive
-    client.add_directive("You are a helpful chatbot who gives correct answers but adds in a joke")
-
-    # Simple loop
-    while True:
-        # Get question from the user
-        client.get_user_input()
-        # Send it to the chatbot and get the response
-        response = client.run_prompt()
-        # Print the response
-        print("\n" + response + "\n")
