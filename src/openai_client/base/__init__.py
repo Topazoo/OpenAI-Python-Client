@@ -1,1 +1,1 @@
-from .client import OpenAPI_Client
+from .client import OpenAI_Client

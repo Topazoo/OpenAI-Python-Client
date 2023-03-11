@@ -1,10 +1,10 @@
 import openai
-from ...base import OpenAPI_Client
+from ...base import OpenAI_Client
 from ...mixins import Chat_Context_Manager_Mixin
 from ...enums import ROLE
 
 # Example concrete client using the base client and a mixin
-class Chat_Bot_Client(OpenAPI_Client, Chat_Context_Manager_Mixin):
+class Chat_Bot_Client(OpenAI_Client, Chat_Context_Manager_Mixin):
     _model = "gpt-3.5-turbo"
     _api = openai.ChatCompletion
 
