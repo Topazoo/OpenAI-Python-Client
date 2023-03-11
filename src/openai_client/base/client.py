@@ -1,6 +1,6 @@
 import os, openai, time
 
-class OpenAPI_Client():
+class OpenAI_Client():
     ''' Base client to interact with the OpenAI API '''
 
     _api_key = ""
