@@ -4,7 +4,7 @@ from typing import List, Dict
 class Chat_Context_Manager_Mixin():
     """ Manages OpenAI Chat Context
     
-    More specifically, this stores acts as a cache of dialogue for a Python client 
+    More specifically, this acts as a cache of dialogue for a Python client 
     interacting with the AI
     """
 
