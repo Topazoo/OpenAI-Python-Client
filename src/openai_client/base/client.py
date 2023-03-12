@@ -10,7 +10,7 @@ class OpenAI_Client():
     _max_retries = 3
     _ms_between_retries = 500
 
-    def __init__(self, api_key:str=None, defaul_model_name:str="", default_temperature=0, max_retries=3, ms_between_retries=500) -> None:
+    def __init__(self, api_key:str=None, defaul_model_name:str="", default_temperature:float=0, max_retries:int=3, ms_between_retries:int=500) -> None:
 
         # Read passed API key but default to reading from environmental variables
         openai.api_key = self._api_key = api_key or os.environ.get('OPENAI_API_KEY')
@@ -64,6 +64,8 @@ class OpenAI_Client():
 
     def _handle_api_error(self, e:Exception):
         """ Handle API errors - Can be overridden """
+
+        # TODO - Maybe a mapping would be better/cooler?
 
         error_type = type(e)
 

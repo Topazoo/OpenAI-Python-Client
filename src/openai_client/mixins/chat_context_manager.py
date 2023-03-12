@@ -1,5 +1,5 @@
 from ..enums import ROLE
-from typing import List, Dict
+from typing import List, Dict, Union
 
 class Chat_Context_Manager_Mixin():
     """ Manages OpenAI Chat Context
@@ -66,22 +66,27 @@ class Chat_Context_Manager_Mixin():
             self._statements.append({"role": role.value, "content": content})
         
 
-    def get_statmenets(self, idx=None):
+    def get_statmenets(self, idx:int=None):
         """ Get all statements or an statement from context by index """
 
         return self._statements if not idx else self._statements[idx]
     
-    def get_directives(self, idx=None):
+    def get_directives(self, idx:int=None):
         """ Get all directives or an item from directives by index """
 
         return self._directives if not idx else self._directives[idx]
     
-    def get_context(self, idx=None):
+    def get_context(self, idx:int=None):
         """ Get a combination of directives and statements to feed to the AI """
 
-        return self.get_directives() + self.get_statmenets()
+        context = self.get_directives() + self.get_statmenets()
+
+        if not idx:
+            return context
+        
+        return context[idx]
     
-    def __getitem__(self, to_get):
+    def __getitem__(self, to_get:Union[int, slice]):
         if isinstance(to_get, slice):
             return self.get_context()[to_get.start:to_get.stop:to_get.step]
         else:
