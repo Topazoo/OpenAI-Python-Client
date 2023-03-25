@@ -15,7 +15,7 @@ class Chat_Context_Manager_Mixin():
     # Permanent context the AI should always be reminded of, like "You are a helpful assistant"
     _directives:List[Dict] = []
 
-    # "Ephemeral" statmenets the AI should be reminded of. The AI is reminded of all statments
+    # "Ephemeral" statements the AI should be reminded of. The AI is reminded of all statments
     # Things like "{"role": "user", "content": "Who won the world series in 2020?"}"
     # if _max_stored_statements is -1 and none if it is 0
     _statements:List[Dict] = []
@@ -41,13 +41,13 @@ class Chat_Context_Manager_Mixin():
         """ Check if a passed role is valid """
 
         if not role in ROLE:
-            raise ValueError(f"Role [{role}] does not exist for {self.__class__}. Valid roles are: {ROLE.get_all_values()}")
+            raise ValueError(f"Role [{role}] does not exist for {self.__class__}. Valid roles are: {ROLE.ALL}")
         
 
     def add_directive(self, content:str):
         """ Add a directive to the directive list """
 
-        self._directives.append({"role": ROLE.SYSTEM.value, "content": content})
+        self._directives.append({"role": ROLE.SYSTEM, "content": content})
 
 
     def add_statement(self, role:ROLE, content:str):
@@ -63,10 +63,10 @@ class Chat_Context_Manager_Mixin():
                 del self._statements[0]
 
             # Store latest context
-            self._statements.append({"role": role.value, "content": content})
+            self._statements.append({"role": role, "content": content})
         
 
-    def get_statmenets(self, idx:int=None):
+    def get_statements(self, idx:int=None):
         """ Get all statements or an statement from context by index """
 
         return self._statements if not idx else self._statements[idx]
@@ -79,7 +79,7 @@ class Chat_Context_Manager_Mixin():
     def get_context(self, idx:int=None):
         """ Get a combination of directives and statements to feed to the AI """
 
-        context = self.get_directives() + self.get_statmenets()
+        context = self.get_directives() + self.get_statements()
 
         if not idx:
             return context

@@ -1,12 +1,13 @@
 import openai
 from ...base import OpenAI_Client
 from ...mixins import Chat_Context_Manager_Mixin
-from ...enums import ROLE
+from ...enums import ROLE, CHAT_MODELS
 
 # Example concrete client using the base client and a mixin
 class Chat_Bot_Client(OpenAI_Client, Chat_Context_Manager_Mixin):
-    _model = "gpt-3.5-turbo"
+    _model = CHAT_MODELS.GPT_3_5_TURBO
     _api = openai.ChatCompletion
+    _supported_models = CHAT_MODELS
 
     def run_prompt(self, temperature: float = 0):
         """ Sends a prompt to OpenAPI """

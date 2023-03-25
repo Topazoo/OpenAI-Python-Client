@@ -34,4 +34,4 @@ class URL_Image_Client(OpenAI_Image_Client, Image_Context_Manager_Mixin):
 class B64_JSON_Image_Client(URL_Image_Client):
     """ Generate images from a prompt and return the image in b64 JSON"""
 
-    _response_format = IMAGE_RESPONSE_FORMAT.B64_JSON.value
+    _response_format = IMAGE_RESPONSE_FORMAT.B64_JSON
