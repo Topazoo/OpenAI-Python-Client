@@ -1,14 +1,25 @@
-import os, openai, time
+import os, openai, time, logging
+
+# Typing
+from ..enums import MODELS, COMPLETION_MODELS
 
 class OpenAI_Client():
     ''' Base client to interact with the OpenAI API '''
 
+    # Base API Key
     _api_key = ""
+    # Base Temperature
     _temperature = 0
-    _model = "text-davinci-003"
+    # Base Model
+    _model = COMPLETION_MODELS.TEXT_DAVINCI_002
+    # Base API Endoint
     _api = openai.Completion
+    # Base number of API call retries
     _max_retries = 3
+    # Base ms between retries
     _ms_between_retries = 500
+    # Base models supported
+    _supported_models = MODELS
 
     def __init__(self, api_key:str=None, defaul_model_name:str="", default_temperature:float=0, max_retries:int=3, ms_between_retries:int=500) -> None:
 
@@ -17,9 +28,8 @@ class OpenAI_Client():
         if not self._api_key:
             raise ValueError("OpenAI API key must be set")
 
-        # TODO - Models enum check
         # Read passed default model but default to reading from environmental variables
-        self._model = defaul_model_name or os.environ.get('OPENAI_DEFAULT_MODEL', self._model)
+        self._model = self._validate_model(defaul_model_name or os.environ.get('OPENAI_DEFAULT_MODEL', self._model))
 
         # Read passed default temperature but default to reading from environmental variables
         self._temperature = default_temperature or os.environ.get('OPENAI_DEFAULT_TEMPERATURE', self._temperature)
@@ -34,6 +44,15 @@ class OpenAI_Client():
         # manage the result of calls from mixins (e.g. to filter results)
         self._create = self._api.create
         self._api.create = self._api_call_interceptor
+    
+
+    def _validate_model(self, model_name:str) -> str:
+        ''' Validates if a passed model is valid for the client '''
+
+        if model_name not in self._supported_models:
+            logging.warn(f"\n\nThe model [{model_name}] is not supported for this client [{self.__class__}]. If this is not a custom fine-tuned model this is likely an error!\n")
+            
+        return model_name
     
 
     def _api_call_interceptor(self, **kwargs):

@@ -9,8 +9,8 @@ class OpenAI_Image_Client(OpenAI_Client):
     """ Base client for interacting with OpenAI Image generation API """
 
     _api = openai.Image
-    _size = IMAGE_SIZE.SIZE_1024x1024.value
-    _response_format = IMAGE_RESPONSE_FORMAT.URL.value
+    _size = IMAGE_SIZE.SIZE_1024x1024
+    _response_format = IMAGE_RESPONSE_FORMAT.URL
     _number_of_images = 1
 
     def __init__(self, api_key: str = None, max_retries=3, ms_between_retries=500, default_size:IMAGE_SIZE = None, 
