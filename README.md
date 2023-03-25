@@ -10,7 +10,8 @@ Right now this just provides a base client that allows a reusable way to do comm
 Now this also includes some pre-built "recipe" clients:
 
 - [ChatBot Client](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/chatbot/client.py)
-- [Image Generation Client ](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/image_generation/clients/create_image.py)
+- [Image Generation Client ](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/images/clients/create_image.py)
+- [Image Edit Client ](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/images/clients/edit_image.py)
 
 
 ## Example
@@ -87,6 +88,31 @@ if __name__ == "__main__":
     print(image_url)
 ```
 
+### Image Edit Client
+
+```python
+# Import this library :)
+from openai_client import URL_Image_Edit_Client
+
+# Simple image edit app :)
+if __name__ == "__main__":
+    # You can open the file yourself
+    image = open("src/openai_client/clients/images/demos/image.png", "rb")
+    # Or just pass a string path
+    mask = "src/openai_client/clients/images/demos/mask.png"
+
+    # API Key is read from OPENAI_API_KEY
+    client = URL_Image_Edit_Client(image, mask)
+
+    # Prompt the user for input (e.g. "a goofy looking cartoon smiley face")
+    face = input("Describe a face to generate:\n>>> ")
+
+    # Send the request and get the image URL
+    image_url = client.run_prompt(face)
+
+    # Get the image URL
+    print(image_url)
+```
 
 4. Use Mixins and the base class to create new "stateful" clients on top of the base client. See the implementation of [Chat_Bot_Client](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/chatbot/client.py) for an example
 

@@ -10,7 +10,7 @@ class Chat_Bot_Client(OpenAI_Client, Chat_Context_Manager_Mixin):
     _supported_models = CHAT_MODELS
 
     def run_prompt(self, temperature: float = 0):
-        """ Sends a prompt to OpenAPI """
+        """ Sends a prompt to OpenAI """
 
         # Call the API and get a response
         result = self._api.create(model=self._model, messages=self.get_context(), temperature=temperature or self._temperature)
@@ -23,7 +23,7 @@ class Chat_Bot_Client(OpenAI_Client, Chat_Context_Manager_Mixin):
                 return response
             
         except Exception:
-            raise Exception("Failed to get a response from OpenAPI")
+            raise Exception("Failed to get a response from OpenAI API")
         
 
     def get_user_input(self):

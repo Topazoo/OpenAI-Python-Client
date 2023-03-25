@@ -1,4 +1,4 @@
-from .clients import URL_Image_Client
+from ..clients import URL_Image_Client
 
 # Simple animal mashup app :)
 if __name__ == "__main__":

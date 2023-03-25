@@ -8,16 +8,24 @@
             "name": "OpenAI Client Demo: Image Generation",
             "type": "python",
             "request": "launch",
-            "cwd": "${workspaceFolder}/..",
-            "module": "${workspaceFolderBasename}.src.openai_client.clients.image_generation.url_image_gen_demo", 
+            "cwd": "${workspaceFolder}/",
+            "module": "src.openai_client.clients.images.demos.url_image_gen_demo", 
+            "justMyCode": true
+        },
+        {
+            "name": "OpenAI Client Demo: Image Edit",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/",
+            "module": "src.openai_client.clients.images.demos.url_image_edit_demo", 
             "justMyCode": true
         },
         {
             "name": "OpenAI Client Demo: Chatbot",
             "type": "python",
             "request": "launch",
-            "cwd": "${workspaceFolder}/..",
-            "module": "${workspaceFolderBasename}.src.openai_client.clients.chatbot.d_and_d_demo",
+            "cwd": "${workspaceFolder}/",
+            "module": "src.openai_client.clients.chatbot.d_and_d_demo",
             "justMyCode": true
         },
     ]
