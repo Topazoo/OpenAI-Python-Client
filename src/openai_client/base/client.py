@@ -84,14 +84,11 @@ class OpenAI_Client():
     def _handle_api_error(self, e:Exception):
         """ Handle API errors - Can be overridden """
 
-        # TODO - Maybe a mapping would be better/cooler?
-
         error_type = type(e)
 
         # Handle API error here, e.g. retry and log
         if error_type in [openai.error.APIError, openai.error.ServiceUnavailableError]:
-            # TODO - Logger
-            print(f"[Retrying] {e}")
+            logging.warn(f"[Retrying] {e}")
 
         # Handle connection error here
         elif error_type == openai.error.APIConnectionError:
@@ -99,8 +96,7 @@ class OpenAI_Client():
 
         # Handle rate limit error (we recommend using exponential backoff)
         elif error_type == openai.error.RateLimitError:
-            # TODO - HANDLE
-            print(f"OpenAI API request exceeded rate limit: {e}")
+            logging.warn(f"OpenAI API request exceeded rate limit: {e}")
 
         # Re-throw unknown errors
         else:
