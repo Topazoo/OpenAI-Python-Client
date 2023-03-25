@@ -25,7 +25,7 @@
             "type": "python",
             "request": "launch",
             "cwd": "${workspaceFolder}/",
-            "module": "src.openai_client.clients.chatbot.d_and_d_demo",
+            "module": "src.openai_client.clients.chatbot.demos.d_and_d_chatbot_demo",
             "justMyCode": true
         },
     ]

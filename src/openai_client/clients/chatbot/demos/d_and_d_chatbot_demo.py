@@ -1,4 +1,4 @@
-from .client import Chat_Bot_Client
+from ..client import Chat_Bot_Client
 
 # Simple D&D chatbot app :)
 if __name__ == "__main__":
