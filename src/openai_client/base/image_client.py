@@ -2,7 +2,7 @@ import openai, os
 from . import OpenAI_Client
 
 # Typing
-from io import BufferedReader
+from io import BufferedReader, BytesIO
 from typing import Union, List
 from ..enums import IMAGE_SIZE, IMAGE_RESPONSE_FORMAT
 
@@ -29,11 +29,11 @@ class OpenAI_Image_Client(OpenAI_Client):
         self._response_format = default_response_format or os.environ.get('OPENAI_DEFAULT_IMAGE_RESPONSE_FORMAT', self._response_format)
 
 
-    def _open_image(self, image:Union[str, BufferedReader]) -> BufferedReader:
+    def _open_image(self, image:Union[str, BufferedReader, BytesIO]) -> BufferedReader:
         """ Attempt to open an image if it's not already opened """
 
         try:
-            return image if isinstance(image, BufferedReader) else open(image, "rb")
+            return image if isinstance(image, (BufferedReader, BytesIO)) else open(image, "rb")
         except Exception as e:
             raise IOError(f"Failed to open image in {self.__class__}: {e}")
         
