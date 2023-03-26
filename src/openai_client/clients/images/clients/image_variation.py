@@ -6,7 +6,7 @@ from ....mixins import Image_Context_Manager_Mixin
 
 # Typing
 from ....enums import IMAGE_RESPONSE_FORMAT, IMAGE_SIZE
-from typing import Union
+from typing import Union, List
 from io import BufferedReader
 
 
@@ -16,10 +16,11 @@ class URL_Image_Variation_Client(OpenAI_Image_Client):
         Takes the path (or opened path) to an image 
     """
 
-    def __init__(self, image:Union[str, BufferedReader], api_key: str = None, max_retries=3, ms_between_retries=500, default_size:IMAGE_SIZE = None, 
-                 default_number_of_images:int=1, default_response_format:str=None) -> None:
+    def __init__(self, image:Union[str, BufferedReader], pre_prompt_context:List[str] = None, post_prompt_context:List[str] = None, api_key: str = None, max_retries=3, ms_between_retries=500, default_size:IMAGE_SIZE = None, 
+                    default_number_of_images:int=1, default_response_format:str=None) -> None:
         
         super().__init__(api_key, max_retries, ms_between_retries, default_size, default_number_of_images, default_response_format)
+        Image_Context_Manager_Mixin.__init__(self, pre_prompt_context=pre_prompt_context, post_prompt_context=post_prompt_context)
         
         # Open image from specified location or use already opened image
         self._image = self._open_image(image)

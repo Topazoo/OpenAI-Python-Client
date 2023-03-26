@@ -17,6 +17,7 @@ class Completion_Client(OpenAI_Client, Example_Context_Manager_Mixin):
         super().__init__(api_key, defaul_model_name, default_temperature, max_retries, ms_between_retries)
         Example_Context_Manager_Mixin.__init__(self, directive=directive, examples=examples)
 
+
     def run_prompt(self, prompt:str, temperature: float = 0) -> str:
         """ Sends a prompt to OpenAI with the context stored by the mixin """
 
@@ -44,6 +45,7 @@ class Code_Completion_Client(Completion_Client):
 
     def __init__(self, directive:str="", examples:List[Example]=None, api_key:str=None, defaul_model_name:str="", default_temperature:float=0, max_retries:int=3, ms_between_retries:int=500) -> None:
         super().__init__(directive, examples, api_key, defaul_model_name, default_temperature, max_retries, ms_between_retries)
+
 
     def run_prompt(self, prompt:str, temperature: float = 0) -> str:
         """ Sends a prompt to OpenAI with the context stored by the mixin """
