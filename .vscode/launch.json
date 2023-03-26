@@ -21,6 +21,14 @@
             "justMyCode": true
         },
         {
+            "name": "OpenAI Client Demo: Image Variation",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/",
+            "module": "src.openai_client.clients.images.demos.url_image_variation_demo", 
+            "justMyCode": true
+        },
+        {
             "name": "OpenAI Client Demo: Chatbot",
             "type": "python",
             "request": "launch",
