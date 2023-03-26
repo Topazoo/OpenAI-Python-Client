@@ -29,6 +29,22 @@
             "justMyCode": true
         },
         {
+            "name": "OpenAI Client Demo: Completion Classifier",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/",
+            "module": "src.openai_client.clients.completion.demos.tweet_classification_demo",
+            "justMyCode": true
+        },
+        {
+            "name": "OpenAI Client Demo: Completion Code Generation",
+            "type": "python",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/",
+            "module": "src.openai_client.clients.completion.demos.code_generation_demo",
+            "justMyCode": true
+        },
+        {
             "name": "OpenAI Client Demo: Chatbot",
             "type": "python",
             "request": "launch",
