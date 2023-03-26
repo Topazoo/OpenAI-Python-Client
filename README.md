@@ -12,7 +12,7 @@ Now this also includes some pre-built "recipe" clients:
 - [ChatBot Client](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/chatbot/client.py)
 - [Image Generation Client ](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/images/clients/create_image.py)
 - [Image Edit Client ](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/images/clients/edit_image.py)
-
+- [Image Variation Client ](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/images/clients/image_variation.py)
 
 ## Example
 
@@ -109,6 +109,26 @@ if __name__ == "__main__":
 
     # Send the request and get the image URL
     image_url = client.run_prompt(face)
+
+    # Get the image URL
+    print(image_url)
+```
+
+### Image Variation Client
+
+```python
+# Import this library :)
+from openai_client import URL_Image_Variation_Client
+
+# Simple image variation app :)
+if __name__ == "__main__":
+    image = open("src/openai_client/clients/images/demos/image.png", "rb")
+
+    # API Key is read from OPENAI_API_KEY
+    client = URL_Image_Variation_Client(image)
+
+    # Send the request and get the image URL
+    image_url = client.run_prompt()
 
     # Get the image URL
     print(image_url)
