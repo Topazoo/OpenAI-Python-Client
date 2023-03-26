@@ -20,7 +20,7 @@ class Chat_Context_Manager_Mixin():
     # if _max_stored_statements is -1 and none if it is 0
     _statements:List[Dict] = []
 
-    def __init__(self, max_stored_statements:int=-1, directives:List[str]=None, statements:List[Dict]=None):
+    def __init__(self, max_stored_statements:int=-1, directives:List[Union[str, dict]]=None, statements:List[Dict]=None):
         self._max_stored_statements = max_stored_statements
 
         # Store permanent system context
@@ -30,7 +30,7 @@ class Chat_Context_Manager_Mixin():
         self._statements = statements or []
 
 
-    def _format_directives(self, directives:List[str]):
+    def _format_directives(self, directives:List[Union[str, dict]]):
         """ Take a list of directives and format them in dict form """
 
         if directives:
@@ -44,10 +44,13 @@ class Chat_Context_Manager_Mixin():
             raise ValueError(f"Role [{role}] does not exist for {self.__class__}. Valid roles are: {ROLE.ALL}")
         
 
-    def add_directive(self, content:str):
+    def add_directive(self, content:Union[str,dict]):
         """ Add a directive to the directive list """
 
-        self._directives.append({"role": ROLE.SYSTEM, "content": content})
+        if isinstance(content, str):
+            content = {"role": ROLE.SYSTEM, "content": content}
+
+        self._directives.append(content)
 
 
     def add_statement(self, role:ROLE, content:str):
