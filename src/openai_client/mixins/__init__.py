@@ -1,2 +1,3 @@
 from .chat_context_manager import Chat_Context_Manager_Mixin
 from .image_context_manager import Image_Context_Manager_Mixin
+from .example_context_manager import Example, Example_Context_Manager_Mixin

@@ -9,6 +9,7 @@ Right now this just provides a base client that allows a reusable way to do comm
 
 Now this also includes some pre-built "recipe" clients:
 
+- [Text/Code Completion Clients](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/completion/client.py)
 - [ChatBot Client](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/chatbot/client.py)
 - [Image Generation Client ](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/images/clients/create_image.py)
 - [Image Edit Client ](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/images/clients/edit_image.py)
@@ -16,7 +17,7 @@ Now this also includes some pre-built "recipe" clients:
 
 ## Example
 
-All I've got in lieu of real docs for now :). Run a local chatbot to play Dungeons and Dragons from your command line:
+All I've got in lieu of real docs for now :)
 
 1. Install this library as a PyPi package
 
@@ -75,9 +76,8 @@ if __name__ == "__main__":
     # Add a context to always include before the prompt that is sent to the API
     client.add_pre_prompt_context("Generate a hybrid animal using the following animals:")
     # Add a context to always include after the prompt that is sent to the API
-    client.add_post_prompt_context("This rendering should be hyperrealistic. The background \
-                                   should be a savannah during the daytime")
-
+    client.add_post_prompt_context("This rendering should be hyperrealistic. The background should be a savannah during the daytime")
+    
     # Prompt the user for input
     animals = input("Choose two animals to create a hybrid of:\n>>> ")
 
@@ -132,6 +132,65 @@ if __name__ == "__main__":
 
     # Get the image URL
     print(image_url)
+```
+
+### Text Completion Client - Tweet Classifier
+
+```python
+# Import this library :)
+from openai_client import Completion_Client, Example
+
+# Simple classifier app :)
+if __name__ == "__main__":
+    e1 = Example('Tweet: "I loved the new Batman movie!"', 'Sentiment: "Positive"')
+    e2 = Example('Tweet: "I hated that ice cream."', 'Sentiment: "Negative"')
+
+    # API Key is read from OPENAI_API_KEY
+    client = Completion_Client("Decide whether a Tweet's sentiment is positive, neutral, or negative.", [e1,e2])
+    
+    # Add another example
+    client.add_examples(Example('Tweet: "I did not like the explosion"', 'Sentiment: "Negative"'))
+
+    # Get tweet to classify
+    tweet_to_classify = "Amusement parks are ok"
+
+    # Print the tweet to classify
+    print(f"\nClassifying tweet: '{tweet_to_classify}'")
+
+    # Send to the model with examples
+    response = client.run_prompt(tweet_to_classify)
+
+    # Print result
+    print(response)
+```
+
+### Code Completion Client - Code Generator
+
+```python
+# Import this library :)
+from openai_client import Code_Completion_Client
+import json
+
+# Simple code generation app :)
+if __name__ == "__main__":
+    # API Key is read from OPENAI_API_KEY
+    client = Code_Completion_Client()
+
+    # Get a prompt to generate code with
+    prompt = "Create a Python dictionary of all US states without any non-code text"
+
+    # Print the tweet to classify
+    print(f"Creating code: '{prompt}'")
+
+    # Send to the model with examples
+    response = client.run_prompt(prompt)
+
+    # Load AI generated code into Python object
+    us_states = json.loads(response)
+
+    # Print result for California
+    print(f"Getting result for key: CA")
+    print(us_states["CA"])
 ```
 
 4. Use Mixins and the base class to create new "stateful" clients on top of the base client. See the implementation of [Chat_Bot_Client](https://github.com/Topazoo/OpenAI-Python-Client/blob/main/src/openai_client/clients/chatbot/client.py) for an example
