@@ -16,11 +16,8 @@ class Image_Context_Manager_Mixin():
     _post_prompt_context:List[str] = []
 
     def __init__(self, pre_prompt_context:List[str] = None, post_prompt_context:List[str] = None):
-        if pre_prompt_context:
-            self._pre_prompt_context = pre_prompt_context
-        
-        if post_prompt_context:
-            self._post_prompt_context = post_prompt_context
+        self._pre_prompt_context = pre_prompt_context if pre_prompt_context else []
+        self._post_prompt_context = post_prompt_context if post_prompt_context else []
 
 
     def add_pre_prompt_context(self, context:str):
